@@ -183,10 +183,8 @@ public class App {
                     String cpfVendedor = sc.next();
                     System.out.println("Digite o contato");
                     String contatoVendedor = sc.next();
-                    System.out.println("Digite sua idade");
-                    int idadeVendedor = sc.nextInt();
-                    Cliente cliente = new Cliente(nomeVendedor, cpfVendedor, contatoVendedor, idadeVendedor);
-                    listaClientes.add(cliente);
+                    Vendedor vendedor = new Vendedor(nomeVendedor, cpfVendedor, contatoVendedor);
+                    listaVendedores.add(vendedor);
                     System.out.println("Cliente adicionado com sucesso.");
                 }else if(menuVendedor == 2){
                     System.out.println("----------------------------------------------");
@@ -200,71 +198,90 @@ public class App {
                 }
             }else if(menuModulo == 4){
                 if(!listaClientes.isEmpty() && !listaProdutos.isEmpty() && !listaVendedores.isEmpty()){
-                    System.out.println("Tudo certo, digite o íncide do cliente que você quer registrar a venda");
-                    // Cliente
-                    indiceCliente = 1;
-                    for (Cliente cliente : listaClientes) {
-                        System.out.println("----------------------------------------------");
-                        System.out.println("Produto " + indiceCliente + ": ");
-                        cliente.mostrarCliente();
-                        indiceCliente += 1;
-                        System.out.println("----------------------------------------------");
-                    }
-                    System.out.println("Digite o número do Cliente para registrar a venda");
-                    codigoCliente = sc.nextInt();
-                    codigoCliente -= 1;
-                    indiceCliente = 1;
-                    for (Cliente cliente : listaClientes) {
-                        if (indiceCliente == codigoCliente) {
-                            clienteVenda = cliente;
+                    System.out.println("Digite 1 para regitrar uma nova venda");
+                    System.out.println("Digite 2 para visualizar todas as vendas");
+                    System.out.println("digite 3 para voltar ao meu inicial");
+                    int menuVenda = sc.nextInt();
+                    if(menuVenda == 1){
+                        System.out.println("Tudo certo, digite o íncide do cliente que você quer registrar a venda");
+                        // Cliente
+                        indiceCliente = 1;
+                        for (Cliente cliente : listaClientes) {
+                            System.out.println("----------------------------------------------");
+                            System.out.println("Produto " + indiceCliente + ": ");
+                            cliente.mostrarCliente();
+                            indiceCliente += 1;
+                            System.out.println("----------------------------------------------");
                         }
-                        indiceCliente += 1;
-                    }
-
-                    // Produto
-                    indiceProduto = 1;
-                    for (Produto produto : listaProdutos) {
-                        System.out.println("----------------------------------------------");
-                        System.out.println("Produto " + indiceProduto + ": ");
-                        produto.mostrarProduto();
-                        indiceProduto += 1;
-                        System.out.println("----------------------------------------------");
-                    }
-                    System.out.println("Digite o número do produto para registrar a venda");
-                    codigoProduto = sc.nextInt();
-                    codigoProduto -= 1;
-                    indiceProduto = 1;
-                    for (Produto produto : listaProdutos) {
-                        if (indiceProduto == codigoProduto) {
-                            produtoVenda = produto;
+                        System.out.println("Digite o número do Cliente para registrar a venda");
+                        codigoCliente = sc.nextInt();
+                        codigoCliente -= 1;
+                        indiceCliente = 1;
+                        for (Cliente cliente : listaClientes) {
+                            if (indiceCliente == codigoCliente) {
+                                clienteVenda = cliente;
+                            }
+                            indiceCliente += 1;
                         }
-                        indiceProduto += 1;
-                    }
 
-                    // Vendedores
-                    int indiceVendedores = 1;
-                    for (Vendedor vendedor : listaVendedores) {
-                        System.out.println("----------------------------------------------");
-                        System.out.println("Produto " + indiceVendedores + ": ");
-                        vendedor.mostrarVendedor();
-                        indiceVendedores += 1;
-                        System.out.println("----------------------------------------------");
-                    }
-                    System.out.println("Digite o número do vendedor para registrar a venda");
-                    int codigoVendedores = sc.nextInt();
-                    codigoVendedores -= 1;
-                    indiceVendedor = 1;
-                    for (Vendedor vendedor : listaVendedores) {
-                        if (indiceProduto == codigoVendedores) {
-                            vendedorVenda = vendedor;
+                        // Produto
+                        indiceProduto = 1;
+                        for (Produto produto : listaProdutos) {
+                            System.out.println("----------------------------------------------");
+                            System.out.println("Produto " + indiceProduto + ": ");
+                            produto.mostrarProduto();
+                            indiceProduto += 1;
+                            System.out.println("----------------------------------------------");
                         }
-                        indiceVendedor += 1;
-                    }
+                        System.out.println("Digite o número do produto para registrar a venda");
+                        codigoProduto = sc.nextInt();
+                        codigoProduto -= 1;
+                        indiceProduto = 1;
+                        for (Produto produto : listaProdutos) {
+                            if (indiceProduto == codigoProduto) {
+                                produtoVenda = produto;
+                            }
+                            indiceProduto += 1;
+                        }
 
-                    // Registrando venda
-                    Venda venda = new Venda(clienteVenda, produtoVenda, vendedorVenda);
-                    listaVendas.add(venda);
+                        // Vendedores
+                        int indiceVendedores = 1;
+                        for (Vendedor vendedor : listaVendedores) {
+                            System.out.println("----------------------------------------------");
+                            System.out.println("Produto " + indiceVendedores + ": ");
+                            vendedor.mostrarVendedor();
+                            indiceVendedores += 1;
+                            System.out.println("----------------------------------------------");
+                        }
+                        System.out.println("Digite o número do vendedor para registrar a venda");
+                        int codigoVendedores = sc.nextInt();
+                        codigoVendedores -= 1;
+                        indiceVendedor = 1;
+                        for (Vendedor vendedor : listaVendedores) {
+                            if (indiceProduto == codigoVendedores) {
+                                vendedorVenda = vendedor;
+                            }
+                            indiceVendedor += 1;
+                        }
+
+                        // Registrando venda
+                        Venda venda = new Venda(clienteVenda, produtoVenda, vendedorVenda);
+                        listaVendas.add(venda);
+                    }else if(menuVenda == 2){
+                        System.out.println("----------------------------------------------");
+                        System.out.println("---------- Listando todas as vendas ----------");
+                        System.out.println("----------------------------------------------");
+                        for (Vendedor vendedor : listaVendedores) {
+                            vendedor.mostrarVendedor();
+                        }
+                    }else{
+                        System.out.println("Voltando ao menu inicial...");
+                    }
+                }else{
+                    System.out.println("Necessário termos ao menos um Cliente, um Produto e um Vendedor cadastrado");
                 }
+            }else{
+                System.out.println("Codigo inválido, tente novamente");
             }
         }
         sc.close();
